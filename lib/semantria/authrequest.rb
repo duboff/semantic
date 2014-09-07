@@ -39,6 +39,8 @@ class AuthRequest
 
     headers['Accept-Encoding'] = 'gzip' if @use_compression
 
+
+
     uri = URI.parse(query)
     conn = Net::HTTP.new(uri.host, 443)
     conn.use_ssl = true

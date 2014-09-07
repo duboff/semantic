@@ -4,7 +4,7 @@ require 'semantria'
 print 'Semantria service demo ...', "\r\n"
 
 # the consumer key and secret
-
+$consumer_key, $consumer_secret = "9d205eae-9c7f-4442-92b0-c9aaef1f20e1","325d0014-6995-4e66-a3d5-fd39159138d2"
 
 $initial_texts = [
   # 'Lisa - there\'s 2 Skinny cow coupons available $5 skinny cow ice cream coupons on special k boxes
@@ -82,57 +82,57 @@ $initial_texts.each do |text|
   end
 end
 
-# Count of the sample documents which need to be processed on Semantria
-length = $initial_texts.length
-results = []
+# # Count of the sample documents which need to be processed on Semantria
+# length = $initial_texts.length
+# results = []
 
-while results.length < length
-  print 'Please wait 10 sec for documents ...', "\r\n"
-  # As Semantria isn't real-time solution you need to wait some time before getting of the processed results
-  # In real application here can be implemented two separate jobs, one for queuing of source data another one for retreiving
-  # Wait ten seconds while Semantria process queued document
-  sleep(10)
-  # Requests processed results from Semantria service
-  status = session.getProcessedDocuments()
-  # Check status from Semantria service
-  status.is_a? Array and status.each do |object|
-    results.push(object)
-  end
-  print status.length, ' documents received successfully.', "\r\n"
-end
-
-# results.each do |data|
-#   # Printing of document sentiment score
-#   print 'Document ', data['id'], ' Sentiment score: ', data['sentiment_score'], "\r\n"
-
-#   # Printing of document themes
-#   print 'Document themes:', "\r\n"
-#   data['themes'].nil? or data['themes'].each do |theme|
-#     print '  ', theme['title'], ' (sentiment: ', theme['sentiment_score'], ")", "\r\n"
+# while results.length < length
+#   print 'Please wait 10 sec for documents ...', "\r\n"
+#   # As Semantria isn't real-time solution you need to wait some time before getting of the processed results
+#   # In real application here can be implemented two separate jobs, one for queuing of source data another one for retreiving
+#   # Wait ten seconds while Semantria process queued document
+#   sleep(10)
+#   # Requests processed results from Semantria service
+#   status = session.getProcessedDocuments()
+#   # Check status from Semantria service
+#   status.is_a? Array and status.each do |object|
+#     results.push(object)
 #   end
-
-#   # Printing of document entities
-#   print 'Entities:', "\r\n"
-#   data['entities'].nil? or data['entities'].each do |entity|
-#     print '  ', entity['title'], ' : ', entity['entity_type'], ' (sentiment: ', entity['sentiment_score'], ')', "\r\n"
-#   end
-
-#   # Printing of document phrases
-#   print 'Phrases:', "\r\n"
-#   data['phrases'].nil? or data['phrases'].each do |phrase|
-#     print '  ', phrase['title']
-#     print '     ', 'Sentiment: ' , phrase['sentiment_score'], "\r\n"
-#     print '     ', 'Polarity: ' , phrase['sentiment_polarity'], "\r\n"
-#     print '     ', 'Negating phrase: ', phrase['negating_phrase'], "\r\n"
-#     print '     ', 'Intensifying phrase: ', phrase['intensifying_phrase'], "\r\n"
-#   end
-
-#   puts 'Average sentinment: '
-#   # puts data['phrases'].inject(0) {|res, phrase| res + phrase['sentiment_score']} / data['phrases'].size
-#   puts data['sentiment_score']
-#   print "\r\n"
+#   print status.length, ' documents received successfully.', "\r\n"
 # end
-puts 'Combined sentiment score:'
-puts results.inject(0) {|memo, result| memo + result['sentiment_score']} / results.size
-puts 'Percentage positive'
-puts results.select {|document| document["sentiment_score"] > 0 }.size * 100.0 / results.size
+
+# # results.each do |data|
+# #   # Printing of document sentiment score
+# #   print 'Document ', data['id'], ' Sentiment score: ', data['sentiment_score'], "\r\n"
+
+# #   # Printing of document themes
+# #   print 'Document themes:', "\r\n"
+# #   data['themes'].nil? or data['themes'].each do |theme|
+# #     print '  ', theme['title'], ' (sentiment: ', theme['sentiment_score'], ")", "\r\n"
+# #   end
+
+# #   # Printing of document entities
+# #   print 'Entities:', "\r\n"
+# #   data['entities'].nil? or data['entities'].each do |entity|
+# #     print '  ', entity['title'], ' : ', entity['entity_type'], ' (sentiment: ', entity['sentiment_score'], ')', "\r\n"
+# #   end
+
+# #   # Printing of document phrases
+# #   print 'Phrases:', "\r\n"
+# #   data['phrases'].nil? or data['phrases'].each do |phrase|
+# #     print '  ', phrase['title']
+# #     print '     ', 'Sentiment: ' , phrase['sentiment_score'], "\r\n"
+# #     print '     ', 'Polarity: ' , phrase['sentiment_polarity'], "\r\n"
+# #     print '     ', 'Negating phrase: ', phrase['negating_phrase'], "\r\n"
+# #     print '     ', 'Intensifying phrase: ', phrase['intensifying_phrase'], "\r\n"
+# #   end
+
+# #   puts 'Average sentinment: '
+# #   # puts data['phrases'].inject(0) {|res, phrase| res + phrase['sentiment_score']} / data['phrases'].size
+# #   puts data['sentiment_score']
+# #   print "\r\n"
+# # end
+# puts 'Combined sentiment score:'
+# puts results.inject(0) {|memo, result| memo + result['sentiment_score']} / results.size
+# puts 'Percentage positive'
+# puts results.select {|document| document["sentiment_score"] > 0 }.size * 100.0 / results.size
